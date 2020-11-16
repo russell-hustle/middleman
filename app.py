@@ -1,7 +1,7 @@
 from flask import Flask, request
 from urllib.parse import parse_qs
 from requests import get
-# from flask_cors import CORS
+from flask_cors import CORS
 
 
 
@@ -10,7 +10,7 @@ GENIUS_TOKEN = "jnk3Z7zFGcLZsSgZPk0kGifKBUhJzYlhqgDJmbYPCJBxKUVjE1EtudaHvco_90Tr
 
 app = Flask(__name__)
 app.secret_key = 'afhawiq89q2fbq92'
-# CORS(app)
+CORS(app)
 
 @app.route('/')
 def main():
