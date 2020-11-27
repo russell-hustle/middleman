@@ -22,7 +22,7 @@ def dict_factory(cursor, row):
 class Database:
 
     def __init__(self):
-        self.connection = sqlite3.connect('leaderboard.db')
+        self.connection = sqlite3.connect('leaderboard.db', check_same_thread = False)
         self.connection.row_factory = dict_factory
         self.cursor = self.connection.cursor()
 
@@ -40,6 +40,3 @@ class Database:
 
     def updateScore(self, user_id, points, efficiency):
         self.cursor.execute('update leaderboard set points = (?), efficiency = (?) where user_id = (?)', [points, efficiency, user_id])
-        self.connection.commit()
-    
-

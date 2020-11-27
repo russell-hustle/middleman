@@ -38,17 +38,13 @@ def updatescore_endpoint():
         user_data = db.getUser(data['user_id'][0])[0]
         new_points = int(data['points'][0]) + int(user_data['points'])
         new_efficiency = float(data['efficiency'][0]) + float(user_data['efficiency']) / 2
-        print('new points: ', new_points)
-        print('new efficiency: ', new_efficiency)
-        db.updateScore(str(data['user_id']), str(new_points), str(new_efficiency))
+        db.updateScore(str(data['user_id'][0]), str(new_points), str(new_efficiency))
         return 'Score successfully updated.', 201
     else:
         new_points = int(data['points'][0]) + int(user_data[0]['points'])
         new_efficiency = float(data['efficiency'][0]) + float(user_data[0]['efficiency']) / 2
-        db.updateScore(str(data['user_id']), str(new_points), str(new_efficiency))
-        print('new points: ', new_points)
-        print('new efficiency: ', new_efficiency)
-        return 'Score successfully updated.', 201
+        db.updateScore(str(data['user_id'][0]), str(new_points), str(new_efficiency))
+        return 'Score successfully updated.', 204
 
 if __name__ == '__main__':
 	app.debug = True
