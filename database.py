@@ -25,8 +25,8 @@ class Database:
     def getAllRankings(self):
         return self.leaderboard.all()
 
-    def addUser(self, user_id):  
-        return self.leaderboard.insert({'user_id' : user_id, 'points' : 0, 'efficiency' : 0.0})
+    def addUser(self, user_id, name):  
+        return self.leaderboard.insert({'user_id' : user_id, 'name' : name, 'points' : 0, 'efficiency' : 0.0})
 
     def updateScore(self, user_id, points, efficiency):
         self.leaderboard.update(set('points', points), where('user_id') == user_id)

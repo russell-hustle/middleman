@@ -36,7 +36,7 @@ def updatescore_endpoint():
     print("user data: ", user_data)
     if not user_data:
         # user does not yet exist, so we must maketh
-        db.addUser(data['user_id'][0])
+        db.addUser(data['user_id'][0], data['name'][0])
         user_data = db.getUser(data['user_id'][0])
         new_points = int(data['points'][0]) + int(user_data['points'])
         new_efficiency = float(data['efficiency'][0]) + float(user_data['efficiency']) / 2
