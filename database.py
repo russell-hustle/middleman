@@ -4,12 +4,20 @@ from pymysql import cursors, connect
 class Database:
 
     def __init__(self):
+        self.connection = None
+        self.cursor = None
+
+    def initConnection(self):
         self.connection = connect(  host = 'leaderboard-database.cp43fezouin8.us-west-2.rds.amazonaws.com',
                                     port = 3306,
                                     user = 'Root',
                                     password = 'password1',
                                     db = 'leaderboard_database')
         self.cursor = self.connection.cursor(cursors.DictCursor)
+
+    def closeConnection(self):
+        if self.connection:
+            self.connection.close()
 
     def resetTable(self):
         self.cursor.execute('drop table leaderboard')
@@ -19,11 +27,13 @@ class Database:
 
     def getUser(self, user_id):
         self.cursor.execute('select * from leaderboard where user_id = (%s)', [user_id])
-        return self.cursor.fetchall()
+        user = self.cursor.fetchall()
+        return user
 
     def getAllRankings(self):
         self.cursor.execute('select * from leaderboard')
-        return self.cursor.fetchall()
+        all_rankings = self.cursor.fetchall()
+        return all_rankings
 
     def addUser(self, user_id, name):  
         self.cursor.execute('insert into leaderboard (user_id, name, points, efficiency, num_words_tried) values (%s, %s, %s, %s, %s)', [user_id, name, 0, 0.0, 0])

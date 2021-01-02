@@ -135,3 +135,6 @@ dmypy.json
 
 # TinyDB database
 db.json
+
+# VScode crap
+.vscode/
