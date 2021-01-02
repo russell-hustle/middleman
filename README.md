@@ -9,7 +9,7 @@ Endpoints:
 > Returns a welcome message.
 
 ```@app.route('/lyrics', methods = ['POST'])```
-> Takes the 'url' data as x-www-form-urlencoded data, and returns the song lyrics in text
+> Takes the 'url' data as x-www-form-urlencoded data, and returns the song lyrics in text.
 
 ```@app.route('/getleaderboard', methods = ['GET'])```
 > Returns the current leaderboard data from the database in json.
