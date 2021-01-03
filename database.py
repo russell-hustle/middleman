@@ -22,7 +22,13 @@ class Database:
     def resetTable(self):
         self.cursor.execute('drop table leaderboard')
         self.connection.commit()
-        self.cursor.execute('create table leaderboard(id integer auto_increment primary key, user_id text, name text, points integer, efficiency float, num_words_tried integer)')
+        self.cursor.execute('''create table leaderboard(id integer auto_increment primary key, 
+                                                        user_id text, 
+                                                        name text, 
+                                                        points integer, 
+                                                        efficiency float, 
+                                                        num_words_tried integer, 
+                                                        overall_score float)''')
         self.connection.commit()
 
     def getUser(self, user_id):
@@ -36,9 +42,12 @@ class Database:
         return all_rankings
 
     def addUser(self, user_id, name):  
-        self.cursor.execute('insert into leaderboard (user_id, name, points, efficiency, num_words_tried) values (%s, %s, %s, %s, %s)', [user_id, name, 0, 0.0, 0])
+        self.cursor.execute('''insert into leaderboard (user_id, name, points, efficiency, num_words_tried, overall_score) 
+                                                        values (%s, %s, %s, %s, %s, %s)''', 
+                                                        [user_id, name, 0, 0.0, 0, 0.0])
         self.connection.commit()
 
-    def updateScore(self, user_id, points, efficiency, num_words_tried):
-        self.cursor.execute('update leaderboard set points = (%s), efficiency = (%s), num_words_tried = (%s) where user_id = (%s)', [points, efficiency, num_words_tried, user_id])
+    def updateScore(self, user_id, points, efficiency, num_words_tried, overall_score):
+        self.cursor.execute('''update leaderboard set points = (%s), efficiency = (%s), num_words_tried = (%s), overall_score = (%s)
+                               where user_id = (%s)''', [points, efficiency, num_words_tried, overall_score, user_id])
         self.connection.commit()
