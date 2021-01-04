@@ -45,7 +45,8 @@ def updatescore_endpoint():
         new_num_words_tried = int(user_data['num_words_tried']) 
         new_num_words_tried += 1
         new_efficiency = (float(data['efficiency'][0]) + (float(user_data['efficiency']) * int(user_data['num_words_tried']))) / new_num_words_tried 
-        db.updateScore(str(data['user_id'][0]), str(new_points), str(new_efficiency), str(new_num_words_tried))
+        new_overall_score = new_points * new_efficiency
+        db.updateScore(str(data['user_id'][0]), str(new_points), str(new_efficiency), str(new_num_words_tried), str(new_overall_score))
         db.closeConnection()
         return 'Score successfully updated.', 201
     else:
@@ -53,7 +54,8 @@ def updatescore_endpoint():
         new_num_words_tried = int(user_data[0]['num_words_tried']) 
         new_num_words_tried += 1
         new_efficiency = (float(data['efficiency'][0]) + (float(user_data[0]['efficiency']) * int(user_data[0]['num_words_tried']))) / new_num_words_tried 
-        db.updateScore(str(data['user_id'][0]), str(new_points), str(new_efficiency), str(new_num_words_tried))
+        new_overall_score = new_points * new_efficiency
+        db.updateScore(str(data['user_id'][0]), str(new_points), str(new_efficiency), str(new_num_words_tried), str(new_overall_score))
         db.closeConnection()
         return 'Score successfully updated.', 201
 
