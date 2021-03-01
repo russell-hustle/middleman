@@ -18,4 +18,4 @@ Endpoints:
 > Takes the 'user_id', 'points', and 'efficiency' data as x-www-form-urlencoded data, and returns a proper response code after attempting to update the database. 
 
 ```@app.route('/resetleaderboard', methods = ['DELETE'])```
-> Takes the 'magic_word" data as x-www-form-urlencoded data, and if it is correct it resets the leaderboard database.
+> Takes the 'magic_word' data as x-www-form-urlencoded data, and if it is correct it resets the leaderboard database.
